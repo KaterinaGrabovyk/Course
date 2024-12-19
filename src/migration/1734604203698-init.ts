@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Init1734534560400 implements MigrationInterface {
-    name = 'Init1734534560400'
+export class Init1734604203698 implements MigrationInterface {
+    name = 'Init1734604203698'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "types" ("id" SERIAL NOT NULL, "title" character varying NOT NULL, CONSTRAINT "PK_33b81de5358589c738907c3559b" PRIMARY KEY ("id"))`);
@@ -15,7 +15,7 @@ export class Init1734534560400 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_988b9d6a28559a8f4496cf842c" ON "Series" ("title") `);
         await queryRunner.query(`CREATE TABLE "creators" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "surname" character varying, CONSTRAINT "PK_b27dd693f7df17bbfc21f00166a" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_aedbde31d05911380caff5903c" ON "creators" ("name") `);
-        await queryRunner.query(`CREATE TABLE "books" ("id" SERIAL NOT NULL, "number" integer NOT NULL, "plot" text, "pages" integer NOT NULL, "price" money NOT NULL, "isbn" numeric NOT NULL, "amount_in_storage" bigint NOT NULL, "in_stock" boolean NOT NULL, "seriesIdId" integer, CONSTRAINT "PK_f3f2f25a099d24e12545b70b022" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "books" ("id" SERIAL NOT NULL, "name" character varying, "number" integer NOT NULL, "plot" text NOT NULL, "pages" integer NOT NULL, "price" money NOT NULL, "isbn" character varying NOT NULL, "amount_in_storage" bigint NOT NULL, "in_stock" boolean NOT NULL, "seriesIdId" integer, CONSTRAINT "PK_f3f2f25a099d24e12545b70b022" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_54337dc30d9bb2c3fadebc6909" ON "books" ("isbn") `);
         await queryRunner.query(`CREATE TABLE "creators_series" ("seriesId" integer NOT NULL, "creatorsId" integer NOT NULL, CONSTRAINT "PK_0dfc76e7ab8bdaceddc8cb19e35" PRIMARY KEY ("seriesId", "creatorsId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_4a5e90dbc953113c3270e6de08" ON "creators_series" ("seriesId") `);

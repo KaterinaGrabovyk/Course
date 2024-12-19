@@ -13,13 +13,16 @@ export class Book {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  name: string;
+
   @ManyToOne(() => Series, (series) => series.id)
   series_id: Series;
 
   @Column({ nullable: false, type: "int" })
   number: number;
 
-  @Column({ nullable: true, type: "text" })
+  @Column({ nullable: false, type: "text" })
   plot: string;
 
   @Column({ nullable: false, type: "int" })
@@ -28,9 +31,9 @@ export class Book {
   @Column({ nullable: false, type: "money" })
   price: number;
 
-  @Column({ nullable: false, type: "numeric" })
+  @Column({ nullable: false })
   @Index()
-  isbn: number;
+  isbn: string;
 
   @Column({ nullable: false, type: "bigint" })
   amount_in_storage: number;

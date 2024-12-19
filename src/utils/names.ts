@@ -1,0 +1,4 @@
+export const names = ["name"];
+export const surnames = ["surname"];
+export const plot =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pharetra cursus commodo. Proin vestibulum faucibus ex eu pharetra. Nam tristique, nibh nec tincidunt tristique, nunc quam aliquet tellus, sit amet faucibus mi lectus eget felis. Aenean eu quam non nibh pretium elementum. Quisque vulputate eu nibh id tempus. Phasellus rhoncus leo eu lacus faucibus lacinia. Pellentesque et rutrum ligula. Donec at sollicitudin nibh, at hendrerit nulla. Duis et nibh at diam aliquam faucibus. Etiam laoreet lobortis tincidunt. Donec ac neque tincidunt, faucibus turpis vel, sagittis ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod mattis pretium. Ut bibendum enim eu ex sodales cursus. Nullam mattis eget leo sit amet cursus.";
