@@ -37,15 +37,16 @@ function generateISBN13() {
 AppDataSource.initialize()
   .then(async () => {
     // *1
-    console.log("types");
+
     let types = Array.from({ length: 10 }, (_, i) => {
       const type = new Type();
       type.title = `${typesA[0]}${i}`;
       return type;
     });
     await AppDataSource.getRepository(Type).save(types);
+    console.log("types");
     // *2
-    console.log("formats");
+
     let formats = Array.from({ length: 10 }, (_, i) => {
       const format = new Format();
       format.thickness = parseFloat((Math.random() * 4 + 1).toFixed(1));
@@ -54,31 +55,33 @@ AppDataSource.initialize()
       return format;
     });
     await AppDataSource.getRepository(Format).save(formats);
+    console.log("formats");
     // *3
-    console.log("publishings");
+
     let publishings = Array.from({ length: publishingsA.length }, (_, i) => {
       const publishing = new Publishing();
       publishing.title = publishingsA[i];
       return publishing;
     });
     await AppDataSource.getRepository(Publishing).save(publishings);
+    console.log("publishings");
     // *4
-    console.log("creators");
     let creators = Array.from({ length: 5000 }, (_, i) => {
       const creator = new Creator();
       creator.name = `${names[0]}${i}`;
       creator.name = `${surnames[0]}${i}`;
       return creator;
     });
-    // *5
     await AppDataSource.getRepository(Creator).save(creators);
-    console.log("keywords");
+    console.log("creators");
+    // *5
     let keywords = Array.from({ length: keywordsA.length }, (_, i) => {
       const keyword = new Keyword();
       keyword.name = keywordsA[i];
       return keyword;
     });
     await AppDataSource.getRepository(Keyword).save(keywords);
+    console.log("keywords");
     // *6
     function randomForKeywords() {
       const numKeywords = Math.floor(Math.random() * 5) + 1;
@@ -108,7 +111,6 @@ AppDataSource.initialize()
       return selectedCreators;
     }
 
-    console.log("serieses");
     let serieses = Array.from({ length: 100000 }, (__, i) => {
       const series = new Series();
       series.title = `series${i}`;
@@ -136,8 +138,9 @@ AppDataSource.initialize()
       return series;
     });
     await AppDataSource.getRepository(Series).save(serieses, { chunk: 5000 });
+    console.log("serieses");
     // *7
-    console.log("books");
+
     let books = Array.from({ length: 1000000 }, (_, i) => {
       const book = new Book();
       book.series_id = serieses[Math.floor(Math.random() * serieses.length)];
@@ -150,13 +153,14 @@ AppDataSource.initialize()
       book.price = parseFloat((Math.random() * 200 + 200).toFixed(2));
       book.isbn = generateISBN13();
       book.amount_in_storage = Math.floor(Math.random() * 500);
-      if (book.amount_in_storage == 0) {
+      if (book.amount_in_storage === 0) {
         book.in_stock = false;
       } else {
-        true;
+        book.in_stock = true;
       }
       return book;
     });
     await AppDataSource.getRepository(Book).save(books, { chunk: 5000 });
+    console.log("books");
   })
   .catch((error) => console.log(error));

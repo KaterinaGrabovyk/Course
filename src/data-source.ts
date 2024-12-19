@@ -7,7 +7,6 @@ import { Type } from "./entity/Types";
 import { Publishing } from "./entity/Publishing";
 import { Series } from "./entity/Series";
 import { Book } from "./entity/Books";
-import { Init1734604203698 } from "./migration/1734604203698-init";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -19,7 +18,7 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [Creator, Keyword, Format, Type, Publishing, Series, Book],
-  migrations: [Init1734604203698],
+  migrations: ["src/migration/**/*.ts"],
   subscribers: [],
   dropSchema: true,
 });

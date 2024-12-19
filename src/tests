@@ -1,0 +1,8 @@
+import { AppDataSource } from "./data-source";
+import { Creator } from "./entity/Creators";
+import { Keyword } from "./entity/Keywords";
+import { Format } from "./entity/Formats";
+import { Type } from "./entity/Types";
+import { Publishing } from "./entity/Publishing";
+import { Series } from "./entity/Series";
+import { Book } from "./entity/Books";
