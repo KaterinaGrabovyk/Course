@@ -37,16 +37,17 @@ function generateISBN13() {
 AppDataSource.initialize()
   .then(async () => {
     // *1
-
+    console.log("Databae connected. Begin to fill data");
+    console.log("Types getting ready");
     let types = Array.from({ length: 10 }, (_, i) => {
       const type = new Type();
       type.title = `${typesA[0]}${i}`;
       return type;
     });
     await AppDataSource.getRepository(Type).save(types);
-    console.log("types");
+    console.log("Types filled.");
     // *2
-
+    console.log("Formats getting ready");
     let formats = Array.from({ length: 10 }, (_, i) => {
       const format = new Format();
       format.thickness = parseFloat((Math.random() * 4 + 1).toFixed(1));
@@ -55,33 +56,35 @@ AppDataSource.initialize()
       return format;
     });
     await AppDataSource.getRepository(Format).save(formats);
-    console.log("formats");
+    console.log("Formats filled");
     // *3
-
+    console.log("Publishings getting ready");
     let publishings = Array.from({ length: publishingsA.length }, (_, i) => {
       const publishing = new Publishing();
       publishing.title = publishingsA[i];
       return publishing;
     });
     await AppDataSource.getRepository(Publishing).save(publishings);
-    console.log("publishings");
+    console.log("Publishings filled");
     // *4
+    console.log("Creators getting ready");
     let creators = Array.from({ length: 5000 }, (_, i) => {
       const creator = new Creator();
       creator.name = `${names[0]}${i}`;
-      creator.name = `${surnames[0]}${i}`;
+      creator.surname = `${surnames[0]}${i}`;
       return creator;
     });
     await AppDataSource.getRepository(Creator).save(creators);
-    console.log("creators");
+    console.log("Creators filled");
     // *5
+    console.log("Keywords getting ready");
     let keywords = Array.from({ length: keywordsA.length }, (_, i) => {
       const keyword = new Keyword();
       keyword.name = keywordsA[i];
       return keyword;
     });
     await AppDataSource.getRepository(Keyword).save(keywords);
-    console.log("keywords");
+    console.log("Keywords filled");
     // *6
     function randomForKeywords() {
       const numKeywords = Math.floor(Math.random() * 5) + 1;
@@ -110,8 +113,8 @@ AppDataSource.initialize()
       }
       return selectedCreators;
     }
-
-    let serieses = Array.from({ length: 100000 }, (__, i) => {
+    console.log("Serieses getting ready");
+    let serieses = Array.from({ length: 10000 }, (__, i) => {
       const series = new Series();
       series.title = `series${i}`;
       series.age = Math.floor(Math.random() * 18);
@@ -133,15 +136,18 @@ AppDataSource.initialize()
         publishings[Math.floor(Math.random() * publishings.length)];
       series.format_id = formats[Math.floor(Math.random() * formats.length)];
       series.type_id = types[Math.floor(Math.random() * types.length)];
-      series.keywords_id = randomForKeywords();
-      series.creator_id = randomForCreators();
+      series.keywords = randomForKeywords();
+      series.creators = randomForCreators();
+      if (i % 5000 === 0 && i !== 0) {
+        console.log(`Generated ${i} series objects so far...`);
+      }
       return series;
     });
     await AppDataSource.getRepository(Series).save(serieses, { chunk: 5000 });
-    console.log("serieses");
+    console.log("Serieses filled");
     // *7
-
-    let books = Array.from({ length: 1000000 }, (_, i) => {
+    console.log("Books getting ready");
+    let books = Array.from({ length: 100000 }, (_, i) => {
       const book = new Book();
       book.series_id = serieses[Math.floor(Math.random() * serieses.length)];
       book.name = book.series_id.title;
@@ -158,9 +164,14 @@ AppDataSource.initialize()
       } else {
         book.in_stock = true;
       }
+      if (i % 5000 === 0 && i !== 0) {
+        console.log(`Generated ${i} books objects so far...`);
+      }
+
       return book;
     });
     await AppDataSource.getRepository(Book).save(books, { chunk: 5000 });
-    console.log("books");
+    console.log("Books filled");
+    console.log("All data filled and ready to be used.");
   })
   .catch((error) => console.log(error));

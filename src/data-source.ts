@@ -20,5 +20,5 @@ export const AppDataSource = new DataSource({
   entities: [Creator, Keyword, Format, Type, Publishing, Series, Book],
   migrations: ["src/migration/**/*.ts"],
   subscribers: [],
-  dropSchema: true,
+  dropSchema: false,
 });

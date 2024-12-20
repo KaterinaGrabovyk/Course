@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Index,
-  ManyToMany,
-} from "typeorm";
-import { Series } from "./Series";
+import { Entity, PrimaryGeneratedColumn, Column, Index } from "typeorm";
 
 @Entity("keywords")
 export class Keyword {
@@ -15,7 +8,4 @@ export class Keyword {
   @Column({ nullable: false })
   @Index()
   name: string;
-
-  @ManyToMany(() => Series, (series) => series.id)
-  series_id: Series[];
 }

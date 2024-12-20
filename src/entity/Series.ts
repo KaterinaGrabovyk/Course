@@ -47,11 +47,19 @@ export class Series {
   @Column({ type: "boolean", nullable: true })
   status_translation: boolean | null;
 
-  @ManyToMany(() => Creator, (creator) => creator.id)
-  @JoinTable({ name: "creators_series" })
-  creator_id: Creator[];
+  @ManyToMany(() => Creator)
+  @JoinTable({
+    name: "creators_series",
+    joinColumn: { name: "series_id", referencedColumnName: "id" },
+    inverseJoinColumn: { name: "creator_id", referencedColumnName: "id" },
+  })
+  creators: Creator[];
 
-  @ManyToMany(() => Keyword, (keyword) => keyword.id)
-  @JoinTable({ name: "keywords_series" })
-  keywords_id: Keyword[];
+  @ManyToMany(() => Keyword)
+  @JoinTable({
+    name: "keywords_series",
+    joinColumn: { name: "series_id", referencedColumnName: "id" },
+    inverseJoinColumn: { name: "keyword_id", referencedColumnName: "id" },
+  })
+  keywords: Keyword[];
 }

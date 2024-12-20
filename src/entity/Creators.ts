@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Index,
-  ManyToMany,
-} from "typeorm";
-import { Series } from "./Series";
+import { Entity, PrimaryGeneratedColumn, Column, Index } from "typeorm";
 @Entity("creators")
 export class Creator {
   @PrimaryGeneratedColumn()
@@ -17,7 +10,4 @@ export class Creator {
 
   @Column({ nullable: true })
   surname: string;
-
-  @ManyToMany(() => Series, (series) => series.id)
-  series_id: Series[];
 }
