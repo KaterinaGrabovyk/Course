@@ -132,10 +132,10 @@ AppDataSource.initialize()
             Math.floor(Math.random() * restrictedStatuses.length)
           ];
       }
-      series.publishing_id =
+      series.publishing =
         publishings[Math.floor(Math.random() * publishings.length)];
-      series.format_id = formats[Math.floor(Math.random() * formats.length)];
-      series.type_id = types[Math.floor(Math.random() * types.length)];
+      series.format = formats[Math.floor(Math.random() * formats.length)];
+      series.type = types[Math.floor(Math.random() * types.length)];
       series.keywords = randomForKeywords();
       series.creators = randomForCreators();
       if (i % 5000 === 0 && i !== 0) {
@@ -152,7 +152,7 @@ AppDataSource.initialize()
       book.series_id = serieses[Math.floor(Math.random() * serieses.length)];
       book.name = book.series_id.title;
       book.number = Math.floor(
-        Math.random() * book.series_id.amount_translated
+        Math.random() * (book.series_id.amount_translated - 1) + 1
       );
       book.plot = plot;
       book.pages = Math.floor(Math.random() * 476 + 24);

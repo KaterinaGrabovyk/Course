@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Series } from "./Series";
 @Entity("formats")
 export class Format {
   @PrimaryGeneratedColumn()
@@ -11,4 +11,6 @@ export class Format {
   height: number;
   @Column({ nullable: false, type: "float" })
   width: number;
+  @OneToMany(() => Series, (series) => series.format)
+  serieses: Series[];
 }

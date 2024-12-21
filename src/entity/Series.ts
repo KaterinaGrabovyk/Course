@@ -6,6 +6,7 @@ import {
   ManyToOne,
   ManyToMany,
   JoinTable,
+  JoinColumn,
 } from "typeorm";
 
 import { Type } from "./Types";
@@ -23,17 +24,20 @@ export class Series {
   @Index()
   title: string;
 
-  @ManyToOne(() => Publishing, (publishing) => publishing.id)
-  publishing_id: Publishing;
+  @ManyToOne(() => Publishing, { nullable: false })
+  @JoinColumn({ name: "publishing_id" })
+  publishing: Publishing;
 
-  @ManyToOne(() => Type, (type) => type.id)
-  type_id: Type;
+  @ManyToOne(() => Type, { nullable: false })
+  @JoinColumn({ name: "type_id" })
+  type: Type;
 
   @Column({ nullable: false, type: "int" })
   age: number;
 
-  @ManyToOne(() => Format, (format) => format.id)
-  format_id: Format;
+  @ManyToOne(() => Format, { nullable: false })
+  @JoinColumn({ name: "format_id" })
+  format: Format;
 
   @Column({ nullable: false, type: "int" })
   amount_origin: number;
