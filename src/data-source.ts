@@ -10,15 +10,15 @@ import { Book } from "./entity/Books";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "Katy",
-  database: "manga_store",
-  synchronize: true,
-  logging: false,
+  host: process.env.POSTGRES_HOST || "localhost", 
+  port: Number(process.env.POSTGRES_PORT) || 5433,
+  username: process.env.POSTGRES_USER || "postgres",
+  password: process.env.POSTGRES_PASSWORD || "Katy",
+  database: process.env.POSTGRES_DB || "manga_store", 
+  synchronize: process.env.NODE_ENV === 'development', 
+  logging: process.env.NODE_ENV === 'development', 
   entities: [Creator, Keyword, Format, Type, Publishing, Series, Book],
   migrations: ["src/migration/**/*.ts"],
   subscribers: [],
-  dropSchema: false,
+  dropSchema: false, 
 });
